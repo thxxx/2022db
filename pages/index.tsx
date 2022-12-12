@@ -18,16 +18,12 @@ const Home: NextPage = () => {
         <h1 className={styles.title}>2022 Database</h1>
 
         <ButtonContainer>
-          <Button>
-            <Link href="login">로그인으로</Link>
-          </Button>
-          <Button>
-            <Link href="db">데이터베이스로</Link>
-          </Button>
+          <LinkButton href="login">로그인으로</LinkButton>
+          <LinkButton href="db">데이터베이스로</LinkButton>
         </ButtonContainer>
         <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.tsx</code>
+          What to Next?{" "}
+          <code className={styles.code}>connect with Node.js(database)</code>
         </p>
 
         <div className={styles.grid}>
@@ -47,7 +43,7 @@ const Home: NextPage = () => {
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer">
-          Powered by{" "}
+          Made by 호진{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
@@ -59,7 +55,7 @@ const Home: NextPage = () => {
 
 export default Home;
 
-const Button = styled.div`
+const LinkButton = styled(Link)`
   padding: 15px;
   border-radius: 10px;
   border: 1px solid #666666;
