@@ -11,21 +11,20 @@ import {
 import styled from "@emotion/styled";
 import React, { Dispatch, SetStateAction } from "react";
 
-type DataTableType = {
+type ScanTableType = {
   table: string;
   recordNum: number;
-  represent: string;
-  key: string;
+  type: string;
 };
 
-const DataTable = ({
+const ScanTable = ({
   data,
   clicked,
   setClicked,
 }: {
-  data: DataTableType[];
-  clicked?: number;
-  setClicked?: Dispatch<SetStateAction<number>>;
+  data: ScanTableType[];
+  clicked: number;
+  setClicked: Dispatch<SetStateAction<number>>;
 }) => {
   return (
     <div style={{ margin: "10px 0px 40px 0px" }}>
@@ -34,28 +33,21 @@ const DataTable = ({
           {/* <TableCaption>This is test data table.</TableCaption> */}
           <Thead bgColor="red.400">
             <Tr>
-              <CustomTh>테이블</CustomTh>
+              <CustomTh>테이블 명</CustomTh>
               <CustomTh isNumeric>레코드 수</CustomTh>
-              <CustomTh>대표 속성</CustomTh>
-              <CustomTh>대표 결합키</CustomTh>
+              <CustomTh>속성</CustomTh>
             </Tr>
           </Thead>
           <Tbody>
             {data.map((item, index) => {
               return (
                 <CustomTr
+                  bgColor={index === clicked ? "facebook.200" : "gray.0"}
                   key={item.table}
-                  onClick={() => {
-                    console.log("값");
-                    if (setClicked) {
-                      setClicked(index);
-                    }
-                  }}
-                  bgColor={clicked === index ? "facebook.100" : "gray.0"}>
+                  onClick={() => setClicked(index)}>
                   <CustomTd>{item.table}</CustomTd>
                   <CustomTd isNumeric>{item.recordNum}</CustomTd>
-                  <CustomTd>{item.represent}</CustomTd>
-                  <CustomTd>{item.key}</CustomTd>
+                  <CustomTd>{item.type}</CustomTd>
                 </CustomTr>
               );
             })}
@@ -66,7 +58,7 @@ const DataTable = ({
   );
 };
 
-export default DataTable;
+export default ScanTable;
 
 const CustomTh = styled(Th)`
   border: 1px solid rgba(0, 0, 0, 0.2);

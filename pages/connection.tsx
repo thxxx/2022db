@@ -1,14 +1,16 @@
-import { Button, FormLabel, Input } from "@chakra-ui/react";
+import { Button, FormLabel, Input, useToast } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { NextPage } from "next";
 import React, { useState } from "react";
 import Heading1 from "../src/components/Heading1";
+import { useDbStore } from "../src/store";
 
 const Connection: NextPage = () => {
+  const toast = useToast();
   const [type, setType] = useState<"db" | "upload">("db");
-  const [host, setHost] = useState("");
-  const [port, setPort] = useState("");
-  const [db, setDb] = useState("");
+  const { host, isLogin, port, database, setHost, setPort, setDatabase } =
+    useDbStore();
+
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,10 +21,26 @@ const Connection: NextPage = () => {
   return (
     <ConnectionContainer>
       <Heading1>DB 연결 관리</Heading1>
-      <Button onClick={() => setType("db")} margin={1}>
+      <Button
+        onClick={() => setType("db")}
+        margin={1}
+        colorScheme={type === "db" ? "facebook" : "gray"}>
         DB 연결
       </Button>
-      <Button onClick={() => setType("upload")} margin={1}>
+      <Button
+        onClick={() => {
+          if (isLogin) setType("upload");
+          else
+            toast({
+              title: "데이터베이스에 로그인 후 업로드 가능합니다.",
+              // description: "We've created your account for you.",
+              duration: 4000,
+              colorScheme: "facebook",
+              isClosable: true,
+            });
+        }}
+        margin={1}
+        colorScheme={type === "upload" ? "facebook" : "gray"}>
         CSV 업로드
       </Button>
       <br />
@@ -32,7 +50,9 @@ const Connection: NextPage = () => {
           <FormLabel>HOST</FormLabel>
           <CustomInput
             value={host}
-            onChange={(e) => setHost(e.currentTarget.value)}
+            onChange={(e) => {
+              setHost(e.currentTarget.value);
+            }}
           />
           <FormLabel>PORT</FormLabel>
           <CustomInput
@@ -41,8 +61,8 @@ const Connection: NextPage = () => {
           />
           <FormLabel>Database</FormLabel>
           <CustomInput
-            value={db}
-            onChange={(e) => setDb(e.currentTarget.value)}
+            value={database}
+            onChange={(e) => setDatabase(e.currentTarget.value)}
           />
           <FormLabel>U S E R</FormLabel>
           <CustomInput

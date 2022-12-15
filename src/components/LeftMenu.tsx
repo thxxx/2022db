@@ -1,16 +1,29 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Input } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import React from "react";
 import Link from "next/link";
+import { useDbStore } from "../store";
 
 const LeftMenu = () => {
+  const { host, port, database } = useDbStore();
+
   return (
     <MenuContainer>
       <InfoContainer>
-        <div>Host : </div>
-        <div>PORT : </div>
-        <div>Database : </div>
+        <div>
+          <p>Host :</p>
+          {host}
+        </div>
+        <div>
+          <p>Port :</p>
+          {port}
+        </div>
+        <div>
+          <p>Database :</p>
+          {database}
+        </div>
       </InfoContainer>
+      <br />
       <MenuButton href="connection">DB 연결관리</MenuButton>
       <MenuButton href="scan">테이블 속성 도메인 스캔</MenuButton>
       <MenuButton href="edit">테이블 속성 편집</MenuButton>
@@ -29,12 +42,30 @@ const InfoContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  background: gray;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 16px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  margin: 5px;
+
+  div{
+    margin-top: 5px;
+    display:flex;
+    flex-direction;row;
+    align-items:center;
+    font-size: 14px;
+  }
+
+  p {
+    width:120px;
+  }
 `;
 
 const MenuContainer = styled.div`
   padding: 40px 5px;
-  width: 220px;
+  width: 280px;
   position: relative;
   left: 0;
   top: 0;

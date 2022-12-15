@@ -15,6 +15,8 @@ const Single: NextPage = () => {
   const [represent, setRepresent] = useState("");
   const [page, setPage] = useState(0);
 
+  const [clickedTable, setClickedTable] = useState(-1);
+
   return (
     <div>
       <Heading1>단일결합</Heading1>
@@ -46,6 +48,8 @@ const Single: NextPage = () => {
           </SearchContainer>
           <Heading3>▶️ 선택 가능한 테이블 목록</Heading3>
           <DataTable
+            clicked={clickedTable}
+            setClicked={setClickedTable}
             data={[
               {
                 table: "Table A",
