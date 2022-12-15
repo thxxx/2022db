@@ -4,7 +4,6 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
-import axios from "axios";
 
 const Home: NextPage = () => {
   return (
@@ -17,19 +16,7 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>2022 Database</h1>
-        <button
-          onClick={() => {
-            axios
-              .get("http://localhost:5200/")
-              .then((res) => {
-                console.log("응답", res);
-              })
-              .catch((err) => {
-                console.log("에러", err);
-              });
-          }}>
-          크ㄹ릭
-        </button>
+        <button>크ㄹ릭</button>
 
         <ButtonContainer>
           <LinkButton href="login">로그인으로</LinkButton>
