@@ -8,6 +8,21 @@ import Heading2 from "../src/components/Heading2";
 import Heading3 from "../src/components/Heading3";
 import ResultTable from "../src/components/ResultTable";
 
+const sourceDummy = [
+  {
+    table: "Table A",
+    recordNum: 10000,
+    represent: "직업",
+    key: "전화번호",
+  },
+  {
+    table: "Table B",
+    recordNum: 15000,
+    represent: "건강정보",
+    key: "전화번호",
+  },
+];
+
 const Single: NextPage = () => {
   const [table, setTable] = useState("");
   const [key, setKey] = useState("");
@@ -16,6 +31,7 @@ const Single: NextPage = () => {
   const [page, setPage] = useState(0);
 
   const [clickedTable, setClickedTable] = useState(-1);
+  const [joinableTable, setJoinableTable] = useState(-1);
 
   return (
     <div>
@@ -50,22 +66,14 @@ const Single: NextPage = () => {
           <DataTable
             clicked={clickedTable}
             setClicked={setClickedTable}
-            data={[
-              {
-                table: "Table A",
-                recordNum: 10000,
-                represent: "직업",
-                key: "전화번호",
-              },
-              {
-                table: "Table B",
-                recordNum: 15000,
-                represent: "건강정보",
-                key: "전화번호",
-              },
-            ]}
+            data={sourceDummy}
           />
-          <Button marginTop={10} onClick={() => setPage(page + 1)}>
+          <Button
+            colorScheme="facebook"
+            marginTop={10}
+            width={120}
+            height={12}
+            onClick={() => setPage(page + 1)}>
             다음
           </Button>
         </>
@@ -74,18 +82,11 @@ const Single: NextPage = () => {
         <>
           <Heading2>Target 테이블 검색</Heading2>
           <Heading3>▶️ 현재 선택된 Source 테이블</Heading3>
-          <DataTable
-            data={[
-              {
-                table: "Table A",
-                recordNum: 10000,
-                represent: "직업",
-                key: "전화번호",
-              },
-            ]}
-          />
+          <DataTable data={[sourceDummy[clickedTable]]} />
           <Heading3>▶️ Source 테이블과 결합 가능한 테이블 목록</Heading3>
           <DataTable
+            clicked={joinableTable}
+            setClicked={setJoinableTable}
             data={[
               {
                 table: "Table A",
@@ -97,17 +98,19 @@ const Single: NextPage = () => {
           />
           <Button
             marginTop={10}
-            width={200}
-            height={12}
-            onClick={() => setPage(page + 1)}>
-            다음
-          </Button>
-          <Button
-            marginTop={10}
-            width={200}
+            width={120}
             height={12}
             onClick={() => setPage(page - 1)}>
             이전
+          </Button>
+          <Button
+            colorScheme="facebook"
+            marginTop={10}
+            marginLeft={5}
+            width={120}
+            height={12}
+            onClick={() => setPage(page + 1)}>
+            다음
           </Button>
         </>
       )}
@@ -132,15 +135,19 @@ const Single: NextPage = () => {
               },
             ]}
           />
-          <Button marginTop={10} width={200} height={12}>
-            결합 테이블 내려받기
-          </Button>
           <Button
             marginTop={10}
-            width={200}
+            width={120}
             height={12}
             onClick={() => setPage(page - 1)}>
             이전
+          </Button>
+          <Button
+            marginTop={10}
+            marginLeft={5}
+            colorScheme="facebook"
+            height={12}>
+            결합 테이블 내려받기
           </Button>
         </>
       )}

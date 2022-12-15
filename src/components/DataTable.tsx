@@ -51,7 +51,7 @@ const DataTable = ({
                       setClicked(index);
                     }
                   }}
-                  bgColor={clicked === index ? "facebook.100" : "gray.0"}>
+                  bgColor={clicked === index ? "facebook.200" : "gray.0"}>
                   <CustomTd>{item.table}</CustomTd>
                   <CustomTd isNumeric>{item.recordNum}</CustomTd>
                   <CustomTd>{item.represent}</CustomTd>
